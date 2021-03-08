@@ -1,7 +1,8 @@
 import { useDropzone } from "react-dropzone";
-import React, { useCallback, useState, useEffect } from "react";
+import React, {  useState,useRef, useEffect } from "react";
 import './App.css'
-
+import Cropper from "react-cropper";
+import "cropperjs/dist/cropper.css";
 const artDimensionList = {
   3:{
     width:3,
@@ -32,9 +33,18 @@ function App() {
   const [files, setFiles] = useState([]);
   const [artDimension,setArtDimension] = useState("3")
   const [matColour,setMatColour] = useState("3")
+  const [openCrop,setOpenCrop] = useState(false)
+  const [croppedIamge,setCroppedImage] = useState("")
 
-console.log("Files", files);
-console.log({files});
+  const cropperRef = useRef(null);
+  const onCrop = () => {
+    const imageElement = cropperRef.current;
+    const cropper = imageElement.cropper;
+    setCroppedImage(cropper.getCroppedCanvas().toDataURL())
+
+  };
+
+
   const addFiles = (img) =>{
     setFiles(img)
   }
@@ -53,6 +63,11 @@ setArtDimension(e.target.value)
   const handleMatStyle = (e) => {
     setMatColour(e.target.value)
   }
+
+
+  const handleCrop = () => {
+      setOpenCrop(true)
+  }
   return (
     <React.Fragment>
       <div className="container">
@@ -60,14 +75,14 @@ setArtDimension(e.target.value)
         <div>
         <svg
           className="preview-menu"
-          contextmenu="preview-menu"
+          contextMenu="preview-menu"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
           ng-attr-width="{{imgWidth || '100%'}}"
           ng-attr-height="{{imgHeight || '100%'}}"
           ng-attr-view_box= {`0, 0, {{viewBoxWidth()}}, {{viewBoxHeight()}}`}
-          tabindex="-1"
+          tabIndex="-1"
           width="444.5"
           height="444.5"
           viewBox={`0,
@@ -88,7 +103,7 @@ setArtDimension(e.target.value)
                 width={`${artDimensionList[artDimension].width}`}
                 height={`${artDimensionList[artDimension].height}`}
                 preserveAspectRatio="xMidYMid slice"
-                xlinkHref={files.length?files[0].preview:`${process.env.PUBLIC_URL}/r.jpg`}
+                xlinkHref={croppedIamge?croppedIamge:`${process.env.PUBLIC_URL}/r.jpg`}
               ></image>
             </pattern>
             <linearGradient
@@ -99,8 +114,8 @@ setArtDimension(e.target.value)
               y2="100%"
               gradientTransform="rotate(45)"
             >
-              <stop offset="0%" stop-opacity="1" stop-color={matStyleColourList[matColour].matCore}></stop>
-              <stop offset="2%" stop-opacity="1" stop-color={matStyleColourList[matColour].matCore}></stop>
+              <stop offset="0%" stopOpacity="1" stopColor={matStyleColourList[matColour].matCore}></stop>
+              <stop offset="2%" stopOpacity="1" stopColor={matStyleColourList[matColour].matCore}></stop>
             </linearGradient>
             <pattern
               x="3.530646580543654"
@@ -259,8 +274,8 @@ setArtDimension(e.target.value)
               x2="0%"
               y2="100%"
             >
-              <stop offset="0%" stop-opacity="1" stop-color="#fdc360"></stop>
-              <stop offset="100%" stop-opacity="1" stop-color="#ffe7a0"></stop>
+              <stop offset="0%" stopOpacity="1" stopColor="#fdc360"></stop>
+              <stop offset="100%" stopOpacity="1" stopColor="#ffe7a0"></stop>
             </linearGradient>
             <linearGradient
               id="monogram-silver-foil-gradient-frame-50"
@@ -269,8 +284,8 @@ setArtDimension(e.target.value)
               x2="0%"
               y2="100%"
             >
-              <stop offset="0%" stop-opacity="1" stop-color="#cccccc"></stop>
-              <stop offset="100%" stop-opacity="1" stop-color="#e2dede"></stop>
+              <stop offset="0%" stopOpacity="1" stopColor="#cccccc"></stop>
+              <stop offset="100%" stopOpacity="1" stopColor="#e2dede"></stop>
             </linearGradient>
           </defs>
           <g
@@ -281,7 +296,7 @@ setArtDimension(e.target.value)
             data-artworks-count="1"
             data-artwork-key="0"
           >
-            <g className="mount" fill-rule="evenodd">
+            <g className="mount" fillRule="evenodd">
               <path
                 className="mount-surface"
                 fill="#fcfcfc"
@@ -304,7 +319,7 @@ setArtDimension(e.target.value)
               ></rect>
             </g>
             <g className="mats">
-              <g className="mat" data-mat-key="0" fill-rule="evenodd">
+              <g className="mat" data-mat-key="0" fillRule="evenodd">
                 <path
                   className="mat-surface"
                   fill={matStyleColourList[matColour].background}
@@ -351,7 +366,7 @@ setArtDimension(e.target.value)
                   transform="rotate(0, 0, 0) translate(0, 0)"
                 ></path>
                 <path
-                  class="strut"
+                  className="strut"
                   d={`M0,
                   0 L1.5,
                   1.5 L${6.25+artDimensionList[artDimension].height},
@@ -361,9 +376,9 @@ setArtDimension(e.target.value)
                   transform={`rotate(270, 0, 0) translate(-${7.75+artDimensionList[artDimension].height}, 0)`}
                 ></path>
               </g>
-              <g class="moulding">
+              <g className="moulding">
                 <path
-                  class="strut"
+                  className="strut"
                   d={`M0,
                   0 L1.5,
                   1.5 L${6.25+artDimensionList[artDimension].height},
@@ -373,7 +388,7 @@ setArtDimension(e.target.value)
                   transform={`rotate(90, 0, 0) translate(0, -${7.75+artDimensionList[artDimension].width})`}
                 ></path>
                 <path
-                  class="strut"
+                  className="strut"
                   d={`M0,
                   0 L1.5,
                   1.5 L${6.25+artDimensionList[artDimension].width},
@@ -403,7 +418,18 @@ setArtDimension(e.target.value)
               <option label='white' value="3" ></option>
               </select>
               </div>
-          <Doka addFiles={addFiles} />
+          <Doka addFiles={addFiles} files={files} handleCrop={handleCrop}/>
+          {openCrop && <div>
+            <Cropper
+      src={files[0].preview}
+      style={{ height: 400, width: "100%" }}
+      // Cropper.js options
+      initialAspectRatio={16 / 9}
+      guides={false}
+      crop={onCrop}
+      ref={cropperRef}
+    />
+          </div>}
           </div>
         </div>
      
@@ -456,28 +482,10 @@ const thumbButton = {
   cursor: "pointer",
 };
 
-const editImage = (image, done) => {
-  const imageFile = image.doka ? image.doka.file : image;
-  const imageState = image.doka ? image.doka.data : {};
-  // create({
-  //   // recreate previous state
-  //   ...imageState,
 
-  //   // load original image file
-  //   src: imageFile,
-  //   outputData: true,
-
-  //   onconfirm: ({ file, data }) => {
-  //     Object.assign(file, {
-  //       doka: { file: imageFile, data }
-  //     });
-  //     done(file);
-  //   }
-  // });
-};
 
 function Doka(props) {
-  const [files, setFiles] = useState([]);
+
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -490,38 +498,19 @@ function Doka(props) {
           }
         )
       );
-      setFiles(data)
       props.addFiles(data)
     },
   });
 
-  const thumbs = files.map((file, index) => (
+  const thumbs = props.files.map((file, index) => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img src={file.preview} style={img} alt="" />
       </div>
       <button
         style={thumbButton}
-        onClick={() =>
-          editImage(file, (output) => {
-            const updatedFiles = [...files];
-
-            // replace original image with new image
-            updatedFiles[index] = output;
-
-            // revoke preview URL for old image
-            if (file.preview) URL.revokeObjectURL(file.preview);
-
-            // set new preview URL
-            Object.assign(output, {
-              preview: URL.createObjectURL(output),
-            });
-
-            // update view
-            setFiles(updatedFiles);
-          })
-        }
-      >
+        onClick = {props.handleCrop}
+     >
         edit
       </button>
     </div>
@@ -530,9 +519,9 @@ function Doka(props) {
   useEffect(
     () => () => {
       // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
+      props.files.forEach((file) => URL.revokeObjectURL(file.preview));
     },
-    [files]
+    [props.files]
   );
 
   return (
