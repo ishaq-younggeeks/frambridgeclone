@@ -14,6 +14,8 @@
     padding:20px;
     display:flex;
     flex-direction: column;
+    align-items: center;
+  /* justify-content: center; */
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -35,3 +37,29 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {}
 
+
+
+
+
+.custom-select select {
+    border:none;
+   
+}
+
+.custom-select{
+    border: 1px solid black;
+    padding:5px 5px 0;
+    margin:20px;
+    position:relative;
+
+}
+
+.mask {
+    position: absolute;
+    bottom:-1px;
+    right:3px;
+    height:1px;
+    width:45%;
+    background-color: white;
+
+}

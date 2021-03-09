@@ -60,7 +60,7 @@ export default function Frame1(props) {
             ></image>
           </pattern>
           <style>
-          { `.classA { font: italic 1px serif; fill: red; }`}
+          { `.classA { font: italic 1px serif; fill: ${matStyleColourList[matColour].matCore}; }`}
             </style>
           <linearGradient
             id="mat-core-gradient-undefined-frame-50"

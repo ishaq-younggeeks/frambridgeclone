@@ -64,14 +64,18 @@ setArtDimension(e.target.value)
         />
           </div>
           <div className="right_portion">
-            <div>
-              <select value={artDimension} onChange={handleArtDimension}>
+            <div className="custom-select">
+              <div className="mask"></div>
+            <label style={{margin:"0 5px"}} for="dimensions-select">Art Dimension:</label>
+              <select name="dimensions-select" value={artDimension} onChange={handleArtDimension}>
               <option label='"3 x 4.00"' value="3"></option>
               <option label='"4 x 5.33"' value="4"></option>
               <option label='"5 x 6.67"' value="5"></option>
               </select>
               </div>
-              <div>
+              <div className="custom-select">
+              <div className="mask"></div>
+            <label style={{margin:"0 5px"}} for="dimensions-select">Mat Style:</label>
               <select value={matColour} onChange={handleMatStyle}>
               <option label='black' value="1"></option>
               <option label='red' value="2"></option>
