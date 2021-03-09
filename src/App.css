@@ -67,6 +67,25 @@
 
 }
 
+textarea{
+    border:none
+}
+
+.textContainer{
+    position:relative;
+    border:1px solid black;
+    margin-bottom:20px
+}
+
+.textTitle{
+    border-right:1px solid black;
+    padding-left:10px;
+    padding-right:10px;
+    background:black;
+    color:white;
+
+}
+
 
 .dragAccept{
     border:1px solid green;

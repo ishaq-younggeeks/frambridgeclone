@@ -52,6 +52,7 @@ setArtDimension(e.target.value)
     setFrameText(e.target.value)
     console.log(frameText)
   }
+
   return (
     <React.Fragment>
       <div className="container">
@@ -84,9 +85,12 @@ setArtDimension(e.target.value)
               </div>
               <div>
                 <form>
-                  <textarea name="frameText" rows="2" cols="20" value={frameText} onChange={frameTextHandler}>
+                <div className="textTitle">Frame Title</div>
+                  <div className="textContainer">
+                  <textarea name="frameText" rows="2" cols="30" value={frameText} onChange={frameTextHandler}>
 
                   </textarea>
+                  </div>
                 </form>
               </div>
           <Doka addFiles={addFiles} files={files} handleCrop={handleCrop} className="dragndrop"/>
@@ -167,6 +171,7 @@ function Doka(props) {
   const { getRootProps, getInputProps,isDragAccept,isDragReject } = useDropzone({
     accept: "image/*",
     maxFiles: 1,
+    multiple:false,
     onDrop: (acceptedFiles) => {
      
         let data = acceptedFiles.map((file) =>
@@ -188,7 +193,7 @@ function Doka(props) {
         style={thumbButton}
         onClick = {props.handleCrop}
      >
-        edit
+        Crop
       </button>
     </div>
   ));
