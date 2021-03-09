@@ -4,9 +4,12 @@
 }
 
 .left_portion{
+    display: flex;
     width:100%;
     background:#ece6e0;
     padding:20px;
+    align-items: center;
+    justify-content: center;
 }
 
 .right_portion{
@@ -48,7 +51,7 @@
 
 .custom-select{
     border: 1px solid black;
-    padding:5px 5px 0;
+    padding:5px 5x;
     margin:20px;
     position:relative;
 
@@ -63,3 +66,25 @@
     background-color: white;
 
 }
+
+
+.dragAccept{
+    border:1px solid green;
+    background-color: rgba(115, 165, 115, 0.7);
+}
+
+.dragReject{
+    background-color: rgba(230, 166, 188, 0.7);
+
+}
+
+.dropzone {
+    text-align: center;
+    padding: 20px;
+    border: 3px dashed #000 !important;
+    border-radius: 15px;
+    background-color: #fafafa;
+    color: #bdbdbd;
+  
+    margin-bottom: 20px;
+  }

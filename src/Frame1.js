@@ -17,7 +17,7 @@ const artDimensionList = {
 
 const matStyleColourList = {
   1: { background: "#000000", matCore: "#fff" },
-  2: { background: "#ff0000", matCore: "#0000ff" },
+  2: { background: "#556677", matCore: "#0000ff" },
   3: { background: "#fff", matCore: "#000000" },
 };
 export default function Frame1(props) {

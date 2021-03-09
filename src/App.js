@@ -84,12 +84,12 @@ setArtDimension(e.target.value)
               </div>
               <div>
                 <form>
-                  <textarea name="frameText" rows="2" cols="50" value={frameText} onChange={frameTextHandler}>
+                  <textarea name="frameText" rows="2" cols="20" value={frameText} onChange={frameTextHandler}>
 
                   </textarea>
                 </form>
               </div>
-          <Doka addFiles={addFiles} files={files} handleCrop={handleCrop}/>
+          <Doka addFiles={addFiles} files={files} handleCrop={handleCrop} className="dragndrop"/>
           {openCrop && <><div className="clearfix" style={{height:"300px",width:"400px"}}>
             <img
               style={{ width: "100%" }}
@@ -164,7 +164,7 @@ const thumbButton = {
 function Doka(props) {
 
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps,isDragAccept,isDragReject } = useDropzone({
     accept: "image/*",
     maxFiles: 1,
     onDrop: (acceptedFiles) => {
@@ -201,10 +201,16 @@ function Doka(props) {
     [props.files]
   );
 
+  const additionalClass = isDragAccept
+            ? "dragAccept"
+            : isDragReject
+            ? "dragReject"
+            : "";
+
   return (
     <section className="container">
       <div
-        {...getRootProps({ className: "dropzone" })}
+        {...getRootProps({ className: `dropzone ${additionalClass}` })}
         style={{ width: "300px", height: "100px", border: "1px solid grey" }}
       >
         <input {...getInputProps()} />
