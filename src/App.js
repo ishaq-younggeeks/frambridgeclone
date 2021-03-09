@@ -12,6 +12,7 @@ function App() {
   const [matColour,setMatColour] = useState("3")
   const [openCrop,setOpenCrop] = useState(false)
   const [croppedImage,setCroppedImage] = useState("")
+  const [frameText,setFrameText] =useState("")
 
   const cropperRef = useRef(null);
   const onCrop = () => {
@@ -46,6 +47,11 @@ setArtDimension(e.target.value)
   const handleCrop = () => {
       setOpenCrop(true)
   }
+
+  const frameTextHandler = (e) => {
+    setFrameText(e.target.value)
+    console.log(frameText)
+  }
   return (
     <React.Fragment>
       <div className="container">
@@ -54,6 +60,7 @@ setArtDimension(e.target.value)
         croppedImage={croppedImage}
         matColour={matColour}
         artDimension ={artDimension}
+        frameText = {frameText}
         />
           </div>
           <div className="right_portion">
@@ -70,6 +77,13 @@ setArtDimension(e.target.value)
               <option label='red' value="2"></option>
               <option label='white' value="3" ></option>
               </select>
+              </div>
+              <div>
+                <form>
+                  <textarea name="frameText" rows="2" cols="50" value={frameText} onChange={frameTextHandler}>
+
+                  </textarea>
+                </form>
               </div>
           <Doka addFiles={addFiles} files={files} handleCrop={handleCrop}/>
           {openCrop && <><div className="clearfix" style={{height:"300px",width:"400px"}}>
