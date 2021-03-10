@@ -8,7 +8,7 @@
     width:100%;
     background:#ece6e0;
     padding:20px;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
 }
 
@@ -88,22 +88,32 @@ textarea{
 
 
 .dragAccept{
-    border:1px solid green;
-    background-color: rgba(115, 165, 115, 0.7);
+    border:3px dashed green!important;
+
 }
 
 .dragReject{
-    background-color: rgba(230, 166, 188, 0.7);
+    border:3px dashed red!important;
+
 
 }
 
 .dropzone {
     text-align: center;
     padding: 20px;
-    border: 3px dashed #000 !important;
+    border: 3px dashed #000 ;
     border-radius: 15px;
     background-color: #fafafa;
     color: #bdbdbd;
   
     margin-bottom: 20px;
+  }
+
+  .dropzone p {
+      word-wrap: break-word;
+  }
+
+  .croppedPrivew{
+      width:inherit;
+      height:inherit
   }
