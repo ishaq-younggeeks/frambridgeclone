@@ -17,7 +17,7 @@ const artDimensionList = {
 
 const matStyleColourList = {
   1: { background: "#000000", matCore: "#fff" },
-  2: { background: "#556677", matCore: "#0000ff" },
+  2: { background: "#ece6e0", matCore: "#fff" },
   3: { background: "#fff", matCore: "#000000" },
 };
 export default function Frame1(props) {
@@ -60,7 +60,10 @@ export default function Frame1(props) {
             ></image>
           </pattern>
           <style>
-          { `.classA { font: italic 1px serif; fill: ${matStyleColourList[matColour].matCore}; }`}
+          { `.classA { 
+            font: italic 1px serif;
+             fill: ${matStyleColourList[matColour].matCore};
+              }`}
             </style>
           <linearGradient
             id="mat-core-gradient-undefined-frame-50"
@@ -304,7 +307,7 @@ export default function Frame1(props) {
                     3.9375 z`}
               ></path>
                 <g width="5"height="6">
-                  <text x={5} y={5+artDimensionList[artDimension].height} class="classA" >{props.frameText}</text></g>
+                  <text x="50%" y="80%" text-anchor="middle" className="classA" >{props.frameText}</text></g>
               <path
                 data-mat-key="0"
                 data-artwork-key="0"

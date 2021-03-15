@@ -1,9 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect,useContext } from "react";
 import "./App.css";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import Frame1 from "./Frame1";
 import Doka from './DragnDrop'
+import ThemeContext from './ThemeContext';
+
+
+
 function App() {
   const [files, setFiles] = useState([]);
   const [artDimension, setArtDimension] = useState("3");
@@ -13,6 +17,9 @@ function App() {
   const [frameText, setFrameText] = useState("");
 
   const cropperRef = useRef(null);
+
+ const context = useContext(ThemeContext)
+ console.log("current context",context)
   const onCrop = () => {
     const imageElement = cropperRef.current;
     const cropper = imageElement.cropper;
@@ -43,13 +50,17 @@ function App() {
   };
 
   const frameTextHandler = (e) => {
-    setFrameText(e.target.value);
-    console.log(frameText);
+    if(e.target.value.length<17)
+    {
+      setFrameText(e.target.value);
+      console.log(frameText);
+
+    }
   };
 
   return (
     <React.Fragment>
-      <div className="container">
+      <div className="container" style={{background:context==="light"?"green":"transparent"}}>
         <div className="left_portion">
           <Frame1
             croppedImage={croppedImage}
@@ -81,7 +92,7 @@ function App() {
             </label>
             <select value={matColour} onChange={handleMatStyle}>
               <option label="black" value="1"></option>
-              <option label="red" value="2"></option>
+              <option label="cream" value="2"></option>
               <option label="white" value="3"></option>
             </select>
           </div>
